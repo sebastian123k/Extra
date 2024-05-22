@@ -3,42 +3,49 @@ package extra;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.geom.GeneralPath;
 
 import javax.swing.JPanel;
 
 public class Paint extends JPanel{
 	
+	int randomR;
+	int randomG;
+	int randomB;
 	
 	@Override
 	public void paint(Graphics g) {
 
 		super.paint(g);
-		Graphics painter = (Graphics2D)g;
+		Graphics2D painter = (Graphics2D)g;
 		
-		painter.setColor(new Color(0,0,0));
-		painter.fillOval(150, 350, 35, 25);
-		painter.fillOval(315, 350, 35, 25);
+		   int[] xVertices = {110, 134, 218, 146, 166, 110, 54, 74, 2, 86};
+	        int[] yVertices = {0, 72, 72, 108, 196, 144, 196, 108, 72, 72};
+	        
+	        GeneralPath g1 = new GeneralPath();
+	        g1.moveTo(xVertices[0], yVertices[0]);
+	        
+	        for (int i = 1; i < xVertices.length; i++) {
+	            g1.lineTo(xVertices[i], yVertices[i]);
+	        }
+	        g1.closePath(); 
+	        
+	        painter.translate(300, 300);
+	        
+	        for (int j = 0; j < 20; j++) {
+	            painter.rotate(Math.PI / 10.0);
+	            randomR = (int)(Math.random() * 255);
+	            randomG = (int)(Math.random() * 255);
+	            randomB = (int)(Math.random() * 255);
+	            painter.setColor(new Color(randomR,randomG,randomB));
+	            painter.fill(g1);
+	        }
+	    
+
+      
+
+    }
 		
-		painter.setColor(new Color(255,255,255));
-		
-		painter.fillOval(152, 353, 31, 20);
-		painter.fillOval(317, 353, 31, 20);
-		
-		painter.setColor(new Color(0,0,0));
-		painter.fillOval(100, 100, 100, 100);
-		painter.fillOval(300, 100, 100, 100);
-		painter.fillOval(125, 150, 250, 225);
-		painter.fillOval(130, 245, 240, 130);
-		painter.setColor(new Color(248,203,178));
-		painter.fillOval(150, 190, 120, 150);
-		painter.fillOval(230, 190, 120, 150);
-		painter.fillOval(140, 270, 220, 95);
-		painter.setColor(new Color(0,0,0));
-		painter.fillOval(200, 270, 20, 30);
-		painter.fillOval(280, 270, 20, 30);
-		painter.fillOval(235, 295, 30, 20);
-		
-	}
 
 	
 }
